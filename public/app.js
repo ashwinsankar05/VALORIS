@@ -87,8 +87,7 @@ const chatInputForm = document.getElementById('chat-input-form');
 const userInput = document.getElementById('user-input');
 const quickTags = document.getElementById('quick-tags');
 const typingBox = document.getElementById('typing-box');
-const recordsList = document.getElementById('records-list');
-const recordsCount = document.getElementById('records-count');
+
 
 const successModal = document.getElementById('success-modal');
 const modalDetails = document.getElementById('modal-details');
@@ -105,7 +104,6 @@ const skipBootBtn = document.getElementById('skip-boot-btn');
 // Init
 window.addEventListener('DOMContentLoaded', () => {
   initBootSequence();
-  fetchBackendIncidents();
   startChat();
   setupEvents();
   initMouseTrackingCanvas();
@@ -404,7 +402,6 @@ async function dispatchToBackend() {
       state.lastDispatchedIncident = result.incident;
       addBotMessage(`<strong>HELP IS ON THE WAY.</strong> Your emergency signal has been recorded under <strong>${result.incident.id}</strong>.`);
       openSuccessModal(result.incident);
-      fetchBackendIncidents();
     } else {
       addBotMessage(`❌ <strong>Failed to dispatch:</strong> ${result.message || 'Server error'}`);
     }
@@ -412,51 +409,6 @@ async function dispatchToBackend() {
     console.error(err);
     addBotMessage(`❌ <strong>Network Error:</strong> Could not connect to backend server.`);
   }
-}
-
-async function fetchBackendIncidents() {
-  try {
-    const res = await fetch('/api/incidents');
-    if (!res.ok) return;
-    const incidents = await res.json();
-    renderIncidents(incidents);
-  } catch (err) {
-    console.warn('Could not fetch incidents from backend:', err);
-  }
-}
-
-function renderIncidents(incidents) {
-  if (!recordsCount || !recordsList) return;
-  recordsCount.textContent = `${incidents.length} Signal${incidents.length === 1 ? '' : 's'}`;
-
-  if (!incidents || incidents.length === 0) {
-    recordsList.innerHTML = `
-      <div class="empty-state">
-        <i class="fa-solid fa-satellite-dish"></i>
-        <p>No active distress calls logged. Use the chatbot to send an encrypted emergency request to Valoris.</p>
-      </div>
-    `;
-    return;
-  }
-
-  recordsList.innerHTML = '';
-  incidents.forEach(inc => {
-    const item = document.createElement('div');
-    item.className = 'record-item';
-    item.innerHTML = `
-      <div class="record-top">
-        <span class="record-id">${inc.id}</span>
-        <span class="record-time"><i class="fa-regular fa-clock"></i> ${inc.timestamp}</span>
-      </div>
-      <div class="record-details">
-        <strong>${escapeHtml(inc.name)}</strong> (Age: ${escapeHtml(inc.age)}) • 📍 ${escapeHtml(inc.location)} • 📧 ${escapeHtml(inc.email)}
-      </div>
-      <div class="record-grievance">
-        <strong>Grievance:</strong> ${escapeHtml(inc.grievance)}
-      </div>
-    `;
-    recordsList.appendChild(item);
-  });
 }
 
 function openSuccessModal(incident) {
