@@ -77,6 +77,19 @@ body {
 /* ==========================================================================
    Atmospheric Canvas, Mesh & Blooms — Cyan / Violet theme
    ========================================================================== */
+.atmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)),
+    url('valoris-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(1) contrast(1.05);
+  pointer-events: none;
+}
+
 #interactive-canvas {
   position: fixed;
   top: 0;
@@ -734,7 +747,7 @@ body:hover .cursor-glow {
 }
 
 .content-section.alt-bg {
-  background: var(--bg-base);
+  background: rgba(5, 5, 5, 0.72);
   border-top: 1px solid var(--line-subtle);
   border-bottom: 1px solid var(--line-subtle);
   max-width: 100%;
