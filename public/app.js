@@ -108,6 +108,8 @@ window.addEventListener('DOMContentLoaded', () => {
   setupEvents();
   initMouseTrackingCanvas();
   initScrollReveal();
+  initHeroLetters();
+  initPowerCards();
 });
 
 /* ==========================================================================
@@ -678,4 +680,102 @@ function initScrollReveal() {
   });
 
   allTargets.forEach(el => observer.observe(el));
+}
+
+/* ==========================================================================
+   Hero Title — Individual Letter Hover + Signal Ripple
+   ========================================================================== */
+function initHeroLetters() {
+  const letters = document.querySelectorAll('.hero-letter');
+  if (!letters.length) return;
+
+  const rippleTimers = new WeakMap();
+
+  function clearRippleTimers() {
+    letters.forEach((other) => {
+      const t = rippleTimers.get(other);
+      if (t) {
+        clearTimeout(t);
+        rippleTimers.delete(other);
+      }
+    });
+  }
+
+  letters.forEach((letter, index) => {
+    letter.style.setProperty('--i', index);
+
+    letter.addEventListener('mouseenter', () => {
+      clearRippleTimers();
+      letters.forEach((other, otherIndex) => {
+        other.classList.remove('ripple-active');
+        other.style.transitionDelay = `0s`;
+        other.style.webkitTransitionDelay = `0s`;
+        if (other === letter) return;
+
+        const dist = Math.abs(index - otherIndex);
+        const delay = dist * 35;
+        other.style.transitionDelay = `${delay}ms`;
+        other.style.webkitTransitionDelay = `${delay}ms`;
+        other.classList.add('ripple-active');
+
+        const t = setTimeout(() => {
+          other.classList.remove('ripple-active');
+          rippleTimers.delete(other);
+        }, delay + 450);
+        rippleTimers.set(other, t);
+      });
+    });
+
+    letter.addEventListener('mouseleave', () => {
+      clearRippleTimers();
+      letters.forEach((other) => {
+        other.style.transitionDelay = `0s`;
+        other.style.webkitTransitionDelay = `0s`;
+        other.classList.remove('ripple-active');
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   Power Cards — Cursor Light, Scan Line, Signal Transition
+   ========================================================================== */
+function initPowerCards() {
+  const cards = document.querySelectorAll('.power-card');
+  if (!cards.length) return;
+
+  const prefersReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  cards.forEach((card) => {
+    let rect = card.getBoundingClientRect();
+
+    const refreshRect = () => { rect = card.getBoundingClientRect(); };
+    window.addEventListener('resize', refreshRect, { passive: true });
+    window.addEventListener('scroll', refreshRect, { passive: true });
+
+    card.addEventListener('mouseenter', () => {
+      refreshRect();
+      if (prefersReduced()) return;
+      card.classList.remove('scan-active');
+      void card.offsetWidth;
+      card.classList.add('scan-active');
+    });
+
+    card.addEventListener('mousemove', (e) => {
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mouse-x', `${x}%`);
+      card.style.setProperty('--mouse-y', `${y}%`);
+    });
+
+    card.addEventListener('animationend', (e) => {
+      if (e.animationName === 'cardScan') {
+        card.classList.remove('scan-active');
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('scan-active');
+    });
+  });
 }

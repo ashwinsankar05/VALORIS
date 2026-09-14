@@ -511,32 +511,44 @@ body:hover .cursor-glow {
   position: relative;
   z-index: 1;
   cursor: default;
-  transition: letter-spacing 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.45s ease;
+  display: inline-flex;
 }
 
-.hero-title:hover {
-  letter-spacing: 18px;
-  transform: scale(1.04);
+.hero-letter {
+  display: inline-block;
+  will-change: transform;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.4s ease,
+              text-shadow 0.4s ease;
+}
+
+@keyframes heroLetterFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+
+.hero-title:hover .hero-letter {
+  animation: heroLetterFloat 3.5s ease-in-out infinite;
+}
+
+.hero-letter:hover {
+  animation: none;
+  transform: translateY(-8px) scale(1.04);
   filter: brightness(1.3);
-  animation: valorisPulse 1.8s ease-in-out infinite;
+  text-shadow:
+    0 0 20px rgba(255, 255, 255, 0.9),
+    0 0 40px var(--cyan-glow),
+    0 0 80px rgba(255, 255, 255, 0.15);
 }
 
-@keyframes valorisPulse {
-  0%, 100% {
-    text-shadow:
-      0 0 20px rgba(255, 255, 255, 0.9),
-      0 0 60px var(--cyan-glow),
-      0 0 120px rgba(255, 255, 255, 0.2);
-  }
-  50% {
-    text-shadow:
-      0 0 40px rgba(255, 255, 255, 1),
-      0 0 100px var(--cyan-glow),
-      0 0 200px rgba(255, 255, 255, 0.4),
-      0 0 300px rgba(200, 230, 255, 0.15);
-  }
+.hero-letter.ripple-active {
+  animation: none;
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.6),
+    0 0 30px var(--cyan-glow);
 }
 
 .title-white { color: #fff; }
@@ -864,6 +876,8 @@ body:hover .cursor-glow {
 }
 
 .power-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
   background: var(--bg-raised);
   backdrop-filter: blur(12px);
   border: 1px solid var(--line-subtle);
@@ -874,14 +888,80 @@ body:hover .cursor-glow {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: all 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease,
+              background 0.4s ease;
+}
+
+.power-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.06),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.power-card:hover::after {
+  opacity: 1;
+}
+
+.power-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.power-card.scan-active::before {
+  animation: cardScan 0.8s ease-out forwards;
+}
+
+@keyframes cardScan {
+  to { left: 100%; }
 }
 
 .power-card:hover {
   background: var(--bg-elevated);
   border-color: var(--cyan-500);
-  transform: translateY(-6px);
+  transform: translateY(-6px) scale(1.01);
   box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.06);
+}
+
+.power-card:nth-child(2):hover {
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.7), 0 0 45px rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.power-card:active {
+  transform: translateY(-3px) scale(0.99);
+}
+
+.power-card:hover .card-title {
+  filter: brightness(1.2);
+}
+
+.power-card:hover .card-sub {
+  color: var(--cyan-400);
+  filter: brightness(1.15);
+}
+
+.power-card:hover .card-desc {
+  color: var(--ink-muted);
+  filter: brightness(1.1);
 }
 
 .card-glow-bar {
@@ -1784,5 +1864,31 @@ body:hover .cursor-glow {
     margin-left: 0;
     display: block;
     margin-top: 4px;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter {
+    animation: none !important;
+  }
+  .hero-letter:hover,
+  .hero-letter.ripple-active {
+    transform: none;
+    filter: brightness(1.1);
+  }
+  .power-card,
+  .power-card::after,
+  .power-card::before,
+  .card-glow-bar {
+    transition-duration: 0.01s !important;
+  }
+  .power-card.scan-active::before {
+    animation: none !important;
+  }
+  .power-card:hover {
+    transform: none;
   }
 }
