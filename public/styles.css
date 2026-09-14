@@ -86,7 +86,7 @@ body {
     url('valoris-bg.jpg');
   background-size: cover;
   background-position: center;
-  filter: grayscale(1) blur(2px) brightness(0.92) contrast(1.05);
+  filter: grayscale(1) blur(0.5px) brightness(0.92) contrast(1.05);
   pointer-events: none;
   will-change: transform;
   animation: bgDrift 28s ease-in-out infinite alternate;
