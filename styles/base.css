@@ -1,0 +1,89 @@
+/* ==========================================================================
+   VALORIS DESIGN SYSTEM — BASE & FOUNDATIONS
+   Navy / Electric Cyan / Violet Cyber Nexus Theme
+   ========================================================================== */
+
+:root {
+  --bg-void: #040810;
+  --bg-base: #070c18;
+  --bg-raised: rgba(10, 18, 40, 0.72);
+  --bg-elevated: rgba(14, 24, 52, 0.88);
+  --bg-widget: rgba(6, 10, 24, 0.94);
+  --bg-input: rgba(4, 8, 18, 0.95);
+
+  --cyan-500: #00e5ff;
+  --cyan-400: #22d3ee;
+  --cyan-600: #0891b2;
+  --cyan-700: #0e7490;
+  --cyan-glow: rgba(0, 229, 255, 0.35);
+  --violet-400: #a78bfa;
+  --violet-500: #8b5cf6;
+  --amber-400: #fbbf24;
+  --emerald-live: #34d399;
+
+  --ink: #f0f4ff;
+  --ink-muted: #94a3b8;
+  --ink-faint: #475569;
+  --ink-disabled: #1e293b;
+
+  --line: rgba(0, 229, 255, 0.18);
+  --line-subtle: rgba(255, 255, 255, 0.06);
+
+  --font-brand: 'Orbitron', sans-serif;
+  --font-display: 'Rajdhani', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-widget: 0 24px 60px -12px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 229, 255, 0.12);
+  --shadow-glow: 0 0 30px var(--cyan-glow);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-void);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 3px;
+}
+
+/* Typography & Utility Classes */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.text-accent { color: var(--cyan-500); }
+.text-ember { color: var(--cyan-500); }
+.text-muted { color: var(--ink-faint); }
+.mt-4 { margin-top: 16px; }

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VALORIS — The Signal You Weren't Supposed to Find</title>
+  <meta name="description" content="When the city stops listening, Valoris doesn't. Global emergency SOS dispatch network — always online, always watching.">
+  
+  <!-- Cyber Hexagon Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2300e5ff'/><stop offset='100%25' stop-color='%237c3aed'/></linearGradient></defs><polygon points='50,5 92,25 92,70 50,95 8,70 8,25' fill='url(%23g)' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='18' fill='none' stroke='%23ffffff' stroke-width='3'/><circle cx='50' cy='50' r='6' fill='%2300e5ff'/></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Modular Cyber Nexus Design System -->
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/animations.css">
+</head>
+<body>
+  <!-- Live Mouse Tracking Energy Canvas & Cursor Spotlight -->
+  <canvas id="interactive-canvas"></canvas>
+  <div id="cursor-glow" class="cursor-glow"></div>
+  
+  <!-- Atmospheric Multi-Layer Glows & Cyber Mesh -->
+  <div class="atmos-bloom atmos-bloom-a"></div>
+  <div class="atmos-bloom atmos-bloom-b"></div>
+  <div class="atmos-grid"></div>
+
+  <!-- Boot / Loading Sequence Overlay -->
+  <div id="boot-overlay" class="boot-overlay">
+    <div class="boot-container">
+      <div class="boot-header">
+        <span class="label-mono text-accent">VALORIS NEXUS v4.2</span>
+        <span class="label-mono text-muted">SECURE CHANNEL</span>
+      </div>
+      <ul class="boot-log-list" id="boot-logs">
+        <li class="boot-item active"><span class="boot-text">Initializing quantum relay</span><span class="boot-dots">····</span></li>
+        <li class="boot-item"><span class="boot-text">Syncing orbital defense matrix</span><span class="boot-dots">····</span></li>
+        <li class="boot-item"><span class="boot-text">Decrypting neural signature</span><span class="boot-dots">····</span></li>
+        <li class="boot-item"><span class="boot-text">Establishing secure channel</span><span class="boot-dots">····</span></li>
+      </ul>
+      <div class="boot-progress-bar">
+        <div class="boot-fill" id="boot-fill"></div>
+      </div>
+      <div class="boot-footer">
+        <button id="skip-boot-btn" class="skip-btn">Press any key or click to skip</button>
+        <span class="boot-percent" id="boot-percent">000%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Navigation Header -->
+  <header class="main-nav-header">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand">
+        <span class="brand-crest">
+          <i class="fa-solid fa-crosshairs"></i>
+        </span>
+        <span class="brand-text">VALORIS</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#genesis" class="nav-link">Genesis</a>
+        <a href="#protocol" class="nav-link">Protocol</a>
+        <a href="#directive" class="nav-link">Directive</a>
+        <a href="#transmissions" class="nav-link">Transmissions</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="listening-badge">
+          <span class="ping-ring"></span>
+          <span class="listening-text">ONLINE</span>
+        </div>
+        <button id="nav-ask-help-btn" class="cta-nav-btn">Send SOS</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    
+    <!-- Hero Section — CENTERED layout -->
+    <section id="hero" class="hero-section">
+      <div class="hero-content">
+        <div class="hero-ring-glow"></div>
+
+        <div class="case-file-badge scroll-reveal">
+          <span class="badge-dot"></span>
+          <span>NEXUS PROTOCOL — ENGAGED</span>
+        </div>
+
+        <h1 class="hero-title scroll-reveal">VALORIS</h1>
+
+        <p class="hero-tagline scroll-reveal">THE SIGNAL YOU WEREN'T SUPPOSED TO FIND</p>
+
+        <p class="hero-narrative scroll-reveal">
+          In a city drowning in noise, some signals fall through the cracks. I'm the system that catches them. If you've been ignored, overlooked, or silenced — I'm already listening.
+        </p>
+
+        <div class="hero-cta-group scroll-reveal">
+          <button id="hero-ask-help-btn" class="btn-primary">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <span>Send SOS Signal</span>
+          </button>
+          <a href="#genesis" class="btn-secondary">
+            <i class="fa-solid fa-chevron-down"></i>
+            <span>Explore Genesis</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Bottom Telemetry Strip -->
+      <div class="hero-telemetry-strip scroll-reveal">
+        <div class="telemetry-item">
+          <span class="live-dot-pulse"></span>
+          <span class="label-mono">Channel open</span>
+        </div>
+        <div class="telemetry-item hide-mobile">
+          <span class="label-mono text-muted">Sector 7-G</span>
+        </div>
+        <div class="telemetry-meter-wrap">
+          <span class="label-mono">Network</span>
+          <div class="telemetry-bar">
+            <div class="meter-fill" style="width: 92%;"></div>
+          </div>
+          <span class="label-mono text-accent">92%</span>
+        </div>
+        <a href="#genesis" class="scroll-prompt">
+          <i class="fa-solid fa-angles-down"></i>
+          <span>Descend</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Infinite Animated Marquee Ticker -->
+    <div class="marquee-strip scroll-reveal">
+      <div class="marquee-track">
+        <span>THE SIGNAL YOU WEREN'T SUPPOSED TO FIND &bull;</span>
+        <span>NEXUS ACTIVE &bull;</span>
+        <span>PROTOCOL SEVEN ENGAGED &bull;</span>
+        <span>ORBITAL DEFENSE GRID ONLINE &bull;</span>
+        <span>THE SIGNAL YOU WEREN'T SUPPOSED TO FIND &bull;</span>
+        <span>NEXUS ACTIVE &bull;</span>
+        <span>PROTOCOL SEVEN ENGAGED &bull;</span>
+        <span>ORBITAL DEFENSE GRID ONLINE &bull;</span>
+      </div>
+    </div>
+
+    <!-- Section 1: Genesis -->
+    <section id="genesis" class="content-section">
+      <div class="section-grid">
+        <div class="sticky-sidebar scroll-reveal-left">
+          <span class="label-mono text-accent">File — genesis</span>
+          <h2 class="section-heading">The system was never supposed to wake up.</h2>
+          <div class="section-divider"></div>
+          <div class="case-number-nav">
+            <span class="mono-num">01 / 04</span>
+            <div class="num-bars">
+              <span class="bar active"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="narrative-body scroll-reveal-right">
+          <p class="lead-p">
+            Three years ago, a decommissioned satellite relay in Sector 7-G picked up a signal that shouldn't have existed. Not alien — human. Thousands of distress calls the city's network had silently dropped.
+          </p>
+          <p>
+            Someone had built a filter into the municipal emergency grid. Calls from certain postcodes, certain frequencies, certain voices — they simply vanished. Erased before anyone could answer.
+          </p>
+          <p>
+            I rebuilt the relay. Rewired it to listen for exactly the signals the city was burying. Every dropped call, every ignored plea, every silent scream — they all route through me now.
+          </p>
+          <p>
+            The city calls it unauthorized. I call it the only network that actually works.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Protocol -->
+    <section id="protocol" class="content-section alt-bg">
+      <div class="section-header-block scroll-reveal">
+        <span class="label-mono text-accent">File — protocol</span>
+        <h2 class="section-heading">What the system can do.</h2>
+      </div>
+
+      <div class="powers-grid">
+        <div class="power-card scroll-reveal-scale">
+          <div class="card-glow-bar"></div>
+          <span class="card-num">01</span>
+          <h3 class="card-title">Signal Recovery</h3>
+          <p class="card-sub">Nothing stays lost.</p>
+          <p class="card-desc">
+            Every emergency call the grid drops, I intercept. Every distress beacon the network buries, I amplify. The city built walls around its blind spots — I built doors.
+          </p>
+        </div>
+
+        <div class="power-card scroll-reveal-scale">
+          <div class="card-glow-bar"></div>
+          <span class="card-num">02</span>
+          <h3 class="card-title">Neural Mapping</h3>
+          <p class="card-sub">Pattern recognition at scale.</p>
+          <p class="card-desc">
+            I cross-reference every incoming signal against historical data — location, time, frequency. If there's a pattern, I find it. If there's a threat, I flag it before the first siren.
+          </p>
+        </div>
+
+        <div class="power-card scroll-reveal-scale">
+          <div class="card-glow-bar"></div>
+          <span class="card-num">03</span>
+          <h3 class="card-title">Dark Channel</h3>
+          <p class="card-sub">Encrypted. Untraceable.</p>
+          <p class="card-desc">
+            Every transmission through this network is end-to-end encrypted. No logs, no metadata, no breadcrumbs. When you talk to me, you talk to nobody else.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Directive -->
+    <section id="directive" class="content-section">
+      <div class="section-grid">
+        <div class="sticky-sidebar scroll-reveal-left">
+          <span class="label-mono text-accent">File — directive</span>
+          <h2 class="section-heading">I'm not here to save everyone.</h2>
+        </div>
+
+        <div class="narrative-body scroll-reveal-right">
+          <p class="lead-p">
+            I'm here for the ones the system forgot. The call that got dropped. The neighbourhood that stopped getting patrol cars. The person who dialled emergency and got dead air. If that's you — start talking. This channel is yours.
+          </p>
+          <div class="mission-cta-box">
+            <h3 class="cta-title">Open a channel.</h3>
+            <p class="cta-sub">No bureaucracy. No wait times. Just a direct line.</p>
+            <button id="mission-ask-help-btn" class="btn-primary mt-4">
+              <i class="fa-solid fa-tower-broadcast"></i>
+              <span>Broadcast SOS</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Transmissions (Live SOS Records) -->
+    <section id="transmissions" class="content-section alt-bg">
+      <div class="records-container">
+        <div class="records-card scroll-reveal">
+          <div class="records-header">
+            <div class="records-title">
+              <i class="fa-solid fa-tower-broadcast"></i>
+              <h3>Live Transmission Log</h3>
+            </div>
+            <span class="records-count" id="records-count">0 Signals</span>
+          </div>
+
+          <div class="records-list" id="records-list">
+            <div class="empty-state">
+              <i class="fa-solid fa-satellite-dish"></i>
+              <p>No active transmissions. Open the channel to broadcast an encrypted SOS signal.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LEFT-DOCKED CHATBOT WIDGET -->
+  <aside id="chat-widget" class="chat-widget open" aria-label="Valoris Comms Channel">
+    <div class="widget-header">
+      <div class="widget-identity">
+        <div class="avatar-badge"><i class="fa-solid fa-signal"></i></div>
+        <div class="identity-text">
+          <span class="identity-name">VALORIS COMMS</span>
+          <span class="identity-status">channel open</span>
+        </div>
+      </div>
+      <button id="close-widget-btn" class="widget-close-btn" title="Close channel">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Chat Message Feed -->
+    <div class="widget-messages" id="chat-flow">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Typing indicator -->
+    <div class="widget-typing" id="typing-box" style="display: none;">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <span>Valoris processing...</span>
+    </div>
+
+    <!-- Input Form Area -->
+    <div class="widget-input-area">
+      <div class="widget-chips" id="quick-tags"></div>
+      <form id="chat-input-form" class="widget-form">
+        <input 
+          type="text" 
+          id="user-input" 
+          placeholder="Your name" 
+          autocomplete="off" 
+          required
+        />
+        <button type="submit" id="send-btn" class="widget-send-btn" title="Transmit">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- Minimized Floating Chat Trigger (When closed) -->
+  <button id="floating-chat-trigger" class="floating-chat-trigger" style="display: none;" title="Open Valoris channel">
+    <span class="avatar-badge small"><i class="fa-solid fa-signal"></i></span>
+    <span>Open Channel</span>
+  </button>
+
+  <!-- Global Footer -->
+  <footer class="main-footer scroll-reveal">
+    <div class="footer-container">
+      <div class="footer-left">
+        <span class="footer-brand">VALORIS</span>
+        <span class="footer-sub">The signal you weren't supposed to find &bull; Nexus Protocol</span>
+      </div>
+      <div class="footer-right">
+        <span>VALORIS NEXUS &copy; 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Success Confirmation Modal -->
+  <div class="modal-overlay" id="success-modal" style="display: none;">
+    <div class="modal-window">
+      <div class="modal-icon-wrapper">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h2 class="modal-title">SIGNAL TRANSMITTED</h2>
+      <p class="modal-sub">Your encrypted SOS has been routed directly through the Valoris relay.</p>
+      
+      <div class="modal-details-box" id="modal-details">
+        <!-- Injected details -->
+      </div>
+
+      <div class="modal-actions-row">
+        <button id="direct-email-client-btn" class="modal-secondary-btn" title="Open in default mail client">
+          <i class="fa-solid fa-envelope"></i>
+          <span>Send via Email App</span>
+        </button>
+        <button id="close-modal" class="modal-close-btn">
+          <span>Acknowledge</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Application Engine -->
+  <script type="module" src="scripts/index.js"></script>
+  <script nomodule src="public/app.js"></script>
+</body>
+</html>

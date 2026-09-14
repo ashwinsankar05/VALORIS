@@ -1,0 +1,9 @@
+/* ==========================================================================
+   VALORIS DESIGN SYSTEM — MASTER STYLESHEET
+   Aggregates base tokens, structural layouts, UI components & animations
+   ========================================================================== */
+
+@import url('base.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('animations.css');
