@@ -82,11 +82,11 @@ body {
   inset: 0;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)),
+    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
     url('valoris-bg.jpg');
   background-size: cover;
   background-position: center;
-  filter: grayscale(1) blur(8px) brightness(0.95) contrast(1.05);
+  filter: grayscale(1) blur(4px) brightness(1.75) contrast(1.2);
   pointer-events: none;
   will-change: transform;
   animation: bgDrift 28s ease-in-out infinite alternate;
