@@ -22,9 +22,9 @@
   --emerald-live: #888888;
 
   --ink: #ffffff;
-  --ink-muted: #a0a0a0;
-  --ink-faint: #555555;
-  --ink-disabled: #222222;
+  --ink-muted: #c0c0c0;
+  --ink-faint: #8a8a8a;
+  --ink-disabled: #3a3a3a;
 
   --line: rgba(255, 255, 255, 0.15);
   --line-subtle: rgba(255, 255, 255, 0.08);
