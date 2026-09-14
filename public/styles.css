@@ -1030,11 +1030,11 @@ body:hover .cursor-glow {
 }
 
 /* ==========================================================================
-   LEFT-DOCKED CHATBOT WIDGET — Opposite side from reference
+   RIGHT-DOCKED CHATBOT WIDGET
    ========================================================================== */
 .chat-widget {
   position: fixed;
-  left: 28px;
+  right: 28px;
   bottom: 28px;
   width: 370px;
   max-width: calc(100vw - 32px);
@@ -1312,7 +1312,7 @@ body:hover .cursor-glow {
 /* Minimized Floating Trigger */
 .floating-chat-trigger {
   position: fixed;
-  left: 24px;
+  right: 24px;
   bottom: 24px;
   background: var(--bg-widget);
   border: 1px solid var(--line);
@@ -1638,13 +1638,13 @@ body:hover .cursor-glow {
     display: none;
   }
   .chat-widget {
-    left: 12px;
+    right: 12px;
     bottom: 12px;
     width: calc(100vw - 24px);
     height: 460px;
   }
   .floating-chat-trigger {
-    left: 12px;
+    right: 12px;
     bottom: 12px;
   }
   .hero-ring-glow {
@@ -1722,7 +1722,6 @@ body:hover .cursor-glow {
     font-size: 12px;
   }
   .chat-widget {
-    left: 8px;
     right: 8px;
     bottom: 8px;
     width: calc(100vw - 16px);
@@ -1730,7 +1729,7 @@ body:hover .cursor-glow {
     max-height: 540px;
   }
   .floating-chat-trigger {
-    left: 12px;
+    right: 12px;
     bottom: 12px;
     padding: 10px 18px;
     font-size: 13px;
