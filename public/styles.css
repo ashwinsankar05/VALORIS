@@ -534,7 +534,7 @@ body:hover .cursor-glow {
 
 .hero-letter:hover {
   animation: none;
-  transform: translateY(-8px) scale(1.04);
+  transform: translateY(-8px) scale(1.08);
   filter: brightness(1.3);
   text-shadow:
     0 0 20px rgba(255, 255, 255, 0.9),
@@ -937,7 +937,7 @@ body:hover .cursor-glow {
 .power-card:hover {
   background: var(--bg-elevated);
   border-color: var(--cyan-500);
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-8px) scale(1.03);
   box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(255, 255, 255, 0.06);
 }
 
@@ -947,7 +947,7 @@ body:hover .cursor-glow {
 }
 
 .power-card:active {
-  transform: translateY(-3px) scale(0.99);
+  transform: translateY(-4px) scale(1.02);
 }
 
 .power-card:hover .card-title {
