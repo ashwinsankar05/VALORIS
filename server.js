@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ROOT_EMAIL = process.env.ROOT_EMAIL || process.env.SMTP_USER || 'emergency@valoris-nexus.local';
+const ROOT_EMAIL = process.env.SMTP_USER || 'emergency@valoris-nexus.local';
 const DATA_FILE = path.join(__dirname, 'incidents.json');
 
 app.use(cors());
