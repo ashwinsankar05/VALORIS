@@ -594,13 +594,13 @@ function initMouseTrackingCanvas() {
       ctx.moveTo(p.prevX, p.prevY);
       ctx.lineTo(p.x, p.y);
     }
-    ctx.strokeStyle = 'rgba(0, 229, 255, 0.45)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
     ctx.lineWidth = 1.6;
     ctx.lineCap = 'round';
     ctx.stroke();
 
     // 2. Batched Particle Heads
-    ctx.fillStyle = '#00e5ff';
+    ctx.fillStyle = '#ffffff';
     ctx.beginPath();
     for (let i = 0; i < particles.length; i++) {
       const p = particles[i];
@@ -620,7 +620,7 @@ function initMouseTrackingCanvas() {
           ctx.lineTo(mouse.x, mouse.y);
         }
       }
-      ctx.strokeStyle = 'rgba(0, 229, 255, 0.3)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
       ctx.lineWidth = 1.0;
       ctx.stroke();
     }
@@ -638,7 +638,7 @@ function initMouseTrackingCanvas() {
         }
       }
     }
-    ctx.strokeStyle = 'rgba(0, 200, 230, 0.12)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
     ctx.lineWidth = 0.8;
     ctx.stroke();
 
